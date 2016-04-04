@@ -5,12 +5,12 @@
 
 
 	echo "---------------------------------"
-	echo "*** Launching $FILENAME.class $@ ***"
+	echo "*** Launching $MAIN_CLASS_FILE $@ ***"
 	echo "---------------------------------"
 	echo " "
 
 
-    java -cp $CLASS_PATH $MAIN_CLASS_FILE $@
+	java -cp $CLASS_PATH $MAIN_CLASS_FILE $@
 	
 	echo " "
 	echo "---------------------------------"
