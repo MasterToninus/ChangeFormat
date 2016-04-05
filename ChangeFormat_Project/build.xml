@@ -66,5 +66,11 @@
 	    </javadoc>
     </target>    
    
+   <!--CONFIGURAZIONE DI IVY PER LE DIPENDENZE -->
+   
+   
+   
+   
+   
 
 </project>

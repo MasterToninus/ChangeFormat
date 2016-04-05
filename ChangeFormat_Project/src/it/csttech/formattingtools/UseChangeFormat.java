@@ -3,6 +3,19 @@ package it.csttech.formattingtools;
 import org.apache.commons.cli.CommandLine;
 import org.apache.log4j.Logger;
 
+/**
+ * A simple format converter.
+ * 
+ * <p>
+ * 	Format : FW, CSV
+ *
+ * </p>
+ * 
+ *
+ * @author Drago-Orsone, (MasterTonius)
+ * @todo. conversion metod csv -> db
+ * @see 
+ */
 public class UseChangeFormat {
 
   public static final String CSV_FORMAT = "CSV";
@@ -17,13 +30,20 @@ public class UseChangeFormat {
 
   static final Logger log = Logger.getRootLogger();
 
+/**
+ * (main) 
+ * 	Parse arguments, convert imputed file to desidered format
+ *
+ * @param  args options
+*/
   public static void main(String[] args) {
 
+	log.debug("Executing UseChangeFormat.class");
+	
 	MyOptions myOptions = new OptionsChangeFormat();
 	CommandLine cmdLine = myOptions.manageOption(args);
-	if (!myOptions.isCheck()) {
+	if (!myOptions.isCheck())
 		return;
-	}
 
 	ReadWrite readWrite = new ReadWrite();
 	ChangeFormat changeFormat = null;
