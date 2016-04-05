@@ -1,7 +1,8 @@
 package it.csttech.formattingtools;
 
 import org.apache.commons.cli.*;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class OptionsChangeFormat extends BaseMyOptions implements MyOptions {
 
@@ -11,7 +12,7 @@ public class OptionsChangeFormat extends BaseMyOptions implements MyOptions {
 	public static final String OUT_FORMAT_OPT = "of";
 	public static final String HELP_OPT = "h";
 
-	static final Logger log = Logger.getRootLogger();
+	private static final Logger log = LogManager.getLogger();
 
 	@Override
 	public CommandLine manageOption(String[] args) {

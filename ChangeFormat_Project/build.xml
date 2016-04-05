@@ -1,29 +1,45 @@
-<project name="FormattingTools" basedir="." default="main">
+<project name="FormattingTools" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant" default="main">
 	<description>
 		Command line tools to perform several format transformations.
 	</description>
 
     <property name="main-class"  value="it.csttech.formattingtools.UseChangeFormat"/>
 
-    <property name="src.dir"     value="src"/>
-    <property name="build.dir"   value="bin"/>
-    <property name="doc.dir"     value="docs"/>
-    <property name="lib.dir"     value="lib"/>
+    <property name="src.dir"     value="${basedir}/src"/>
+    <property name="build.dir"   value="${basedir}/bin"/>
+    <property name="doc.dir"     value="${basedir}/docs"/>
+    <property name="lib.dir"     value="${basedir}/lib"/>
     <property name="classes.dir" value="${build.dir}"/>
-    <property name="jar.dir"     value="${build.dir}"/>
+    <property name="jar.dir"     value="${build.dir}/publish"/>
     <!--<property name="cfg.dir"	 value="config"/>-->
+	<property name="ivy.dep.file" value="${basedir}/dependencies.xml" />
+	<property name="ivy.install.dir" value="C:\Users\antonio.miti\Documents\GitHub\Tools_NOGIT\apache-ivy-2.4.0
+" />
 
-    <path id="classpath">
-        <fileset dir="${lib.dir}" includes="**/*.jar"/>
-    </path>
-
+	<!-- Bypass a waring -->
 	<presetdef name="javac">
 		<javac includeantruntime="false" />
 	</presetdef>
 
+	<property file="build.properties" />
+
+	<!-- Define the ClassPath -->
+    <path id="classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${jar.dir}">
+			<include name="*.jar" />
+		</fileset>
+    </path>
+
+
+
 	<target name="clean" description="Tidy up the workspace">
-		<delete dir="${build.dir}"/>
-		<delete dir="${doc.dir}"/>
+		<delete failonerror="false" dir="${build.dir}" />
+		<delete failonerror="false" dir="${lib.dir}" />
+		<delete failonerror="false" dir="ivy-report" />
+		<delete failonerror="false" dir="${doc.dir}"/>
 		<delete>
 			<fileset defaultexcludes="no" dir="${src.dir}" includes="**/*~"/>
 		</delete>
@@ -31,10 +47,11 @@
 
 	<target name="init" depends="clean" description="Setup project directories">
         <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${jar.dir}" />
 		<mkdir dir="${doc.dir}"/>
 	</target>
 
-    <target name="compile" depends="init" description="Compile java sources">
+    <target name="compile" depends="init, ivy-retrieve" description="Compile java sources">
         <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
     </target>
     
@@ -65,6 +82,40 @@
 			<tag name="todo." scope="all" description="To do:"/>
 	    </javadoc>
     </target>    
+    
+	<!-- IVY TARGETS -->
+	<target name="ivy-report">
+		<ivy:configure override="true" file="${ivy.install.dir}/ivy-settings.xml" />
+		<mkdir dir="ivy-report" />
+		<ivy:resolve file="dependencies.xml" haltonfailure="false" />
+		<ivy:report todir="ivy-report" />
+	</target>
+
+	<target name="ivy-retrieve">
+		<ivy:configure override="true" file="${ivy.install.dir}/ivy-settings.xml" />
+		<ivy:retrieve sync="true" conf="*" type="jar,bundle" pattern="${lib.dir}/[artifact]-[revision].[ext]" />
+	</target>
+
+	<target name="ivy-retrieve-runtime">
+		<ivy:configure override="true" file="${ivy.install.dir}/ivy-settings.xml" />
+		<ivy:retrieve sync="true" conf="runtime" type="jar,bundle" pattern="build/lib-runtime/[artifact]-[revision].[ext]" />
+	</target>
+
+	<target name="ivy-retrieve-jar">
+		<ivy:configure override="true" file="${ivy.install.dir}/ivy-settings.xml" />
+		<ivy:retrieve sync="true" type="jar,bundle" pattern="build/lib/[artifact].[ext]" conf="provided" />
+	</target>
+
+	<target name="ivy-release" depends="ivy-retrieve">
+		<ivy:configure override="true" file="${ivy.install.dir}/ivy-settings.xml" />
+		<fail message="No ivy resolver selected" unless="ivy.resolver" />
+		<ivy:publish artifactspattern="${basedir}/${dir.publish}/[artifact]-[revision].[ext]" resolver="${ivy.resolver}" pubrevision="${version}" status="release" overwrite="true" />
+	</target>
+
+	<target name="ivy-cleancache">
+		<ivy:cleancache />
+	</target>
+
    
 
 </project>

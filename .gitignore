@@ -13,3 +13,6 @@ hs_err_pid*
 
 # Ignore Doc
 **/docs/
+
+# Ignore dat file
+**/*.dat
