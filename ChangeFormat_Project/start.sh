@@ -1,7 +1,7 @@
 #!/bin/bash 
 
-	MAIN_CLASS_FILE="it.csttech.UseChangeFormat"
-	CLASS_PATH=".;lib/*;bin/classes"
+	MAIN_CLASS_FILE="it.csttech.formattingtools.UseChangeFormat"
+	CLASS_PATH=".;lib/*;bin"
 
 
 	echo "---------------------------------"
