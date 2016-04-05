@@ -1,8 +1,12 @@
 package it.csttech.formattingtools;
 
-public class ChangeFormatCSVtoFW extends BaseChangeFormat implements ChangeFormat {
+public class ChangeFormatCSVtoFW implements ChangeFormat {
 
-	@Override //usare metodi di String per tokenize e formattare fare anche FWtoCSV
+	private static final int FIXED_WIDTH = 20;
+  	private static final char SEPARATOR = ';';
+  	private static final char EMPTY_CHAR = ' ';
+  	private static final char END_CHAR = '*';
+
 	public String transformString(String inputString) {
 		char[] charInputString = inputString.toCharArray();
 		StringBuilder builder = new StringBuilder(); //close? garbage?

@@ -2,12 +2,16 @@ package it.csttech.formattingtools;
 
 import org.apache.log4j.Logger;
 
-public class ChangeFormatFWtoCSV extends BaseChangeFormat implements ChangeFormat {
+public class ChangeFormatFWtoCSV implements ChangeFormat {
 
 	static final Logger log = Logger.getRootLogger();
 
+	private static final int FIXED_WIDTH = 20;
+  	private static final char SEPARATOR = ';';
+  	private static final char END_CHAR = '*';
+
 	//Non presuppone la conoscenza di FIXED_WIDTH ma può generare un problema se fra un campo e un altro rimane un singolo spazio
-	/*@Override 
+	/* 
 	public String transformString(String inputString) {
 		StringBuilder builder = new StringBuilder(); //close? garbage?
 		String[] splitted = inputString.split("\\s{2,}|\\" + END_CHAR);
@@ -18,7 +22,7 @@ public class ChangeFormatFWtoCSV extends BaseChangeFormat implements ChangeForma
 		return builder.toString();
 	}*/
 
-	@Override //Più sicuro a patto di conoscere FIXED_WIDTH
+	//Più sicuro a patto di conoscere FIXED_WIDTH
 	public String transformString(String inputString) {
 		StringBuilder builder = new StringBuilder(); //close? garbage?
 		int fieldsNumber;
