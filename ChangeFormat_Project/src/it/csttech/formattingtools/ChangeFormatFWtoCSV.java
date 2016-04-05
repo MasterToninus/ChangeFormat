@@ -1,4 +1,4 @@
-package it.csttech;
+package it.csttech.formattingtools;
 
 public class ChangeFormatFWtoCSV extends BaseChangeFormat implements ChangeFormat {
 

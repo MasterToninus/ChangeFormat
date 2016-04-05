@@ -1,4 +1,4 @@
-package it.csttech;
+package it.csttech.formattingtools;
 
 import org.apache.commons.cli.*;
 

@@ -1,66 +1,69 @@
-<project name="ChangeFormat" basedir="." default="main">
+<project name="FormattingTools" basedir="." default="main">
+	<description>
+		Command line tools to perform several format transformations.
+	</description>
 
-    <property name="source.dir"     value="src"/>
+    <property name="main-class"  value="it.csttech.formattingtools.UseChangeFormat"/>
 
-    <property name="class.dir"   value="bin"/>
-    <property name="jar.dir"     value="lib"/>
-
-    <property name="main-class"  value="it.csttech.UseChangeFormat"/>
+    <property name="src.dir"     value="src"/>
+    <property name="build.dir"   value="bin"/>
+    <property name="doc.dir"     value="docs"/>
+    <property name="lib.dir"     value="lib"/>
+    <property name="classes.dir" value="${build.dir}"/>
+    <property name="jar.dir"     value="${build.dir}"/>
 
     <path id="classpath">
-	    <fileset dir="${jar.dir}" includes="**/*.jar"/>
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
     </path>
 
-    <target name="clean" description="Delete everything in ${class.dir} folder">
-        <delete dir="${class.dir}" />
-	<mkdir dir="${class.dir}"/>
-    </target>
+	<presetdef name="javac">
+		<javac includeantruntime="false" />
+	</presetdef>
 
-    <target name="compile" depends="clean" description="Compile .class file">
-	    <javac includeantruntime="false" srcdir="${source.dir}" destdir="${class.dir}" classpathref="classpath"/>
-    </target>
+	<target name="clean" description="Tidy up the workspace">
+		<delete dir="${build.dir}"/>
+		<delete dir="${doc.dir}"/>
+		<delete>
+			<fileset defaultexcludes="no" dir="${src.dir}" includes="**/*~"/>
+		</delete>
+	</target>
 
-    <target name="jar" description="Compile .jar file">
-	<delete dir="${jar.dir}" />
+	<target name="init" depends="clean" description="Setup project directories">
+        <mkdir dir="${classes.dir}"/>
+		<mkdir dir="${doc.dir}"/>
+	</target>
+
+    <target name="compile" depends="init" description="Compile java sources">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+    </target>
+    
+    <target name="jar" depends="compile" description="Create .jar file">
         <mkdir dir="${jar.dir}"/>
-        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${class.dir}">
+        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
             <manifest>
                 <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
         </jar>
     </target>
 
-    <target name="run" description="Execute .class file">
-	    <java classname="${main-class}" fork="true"/>
-	     <classpath>
+    <target name="run" depends="jar" description="Run .jar file of the project">
+        <java fork="true" classname="${main-class}">
+            <classpath>
                 <path refid="classpath"/>
-                <path location="${class.dir}"/>
+                <path location="${jar.dir}/${ant.project.name}.jar"/>
             </classpath>
-    </target>
+        </java>
+    </target>  
 
-    <target name="main" depends="compile,run" description="Compile and execute"/>
-
-    <target name="generate-javadoc" description="Generate javadoc">
-    <javadoc
-           destdir="docs/api"
-           author="true"
-           version="true"
-           use="true"
-           windowtitle="Test API">
-
-      <packageset dir="src" defaultexcludes="yes">
-        <include name="it/csttech/**"/>
-        <!-- <exclude name="com/dummy/test/doc-files/**"/> -->
-      </packageset>
-
-      <doctitle><![CDATA[<h1>Test</h1>]]></doctitle>
-      <bottom><![CDATA[<i>Copyright &#169; 2000 Dummy Corp. All Rights Reserved.</i>]]></bottom>
-      <tag name="todo" scope="all" description="To do:"/>
-      <!-- <group title="Group 1 Packages" packages="com.dummy.test.a*"/> -->
-      <!-- <group title="Group 2 Packages" packages="com.dummy.test.b*:com.dummy.test.c*"/> -->
-      <link offline="true" href="http://docs.oracle.com/javase/7/docs/api/" packagelistLoc="C:\tmp"/>
-      <link href="http://docs.oracle.com/javase/7/docs/api/"/>
-    </javadoc>
-    </target>
+    <target name="main" depends="compile" description="Clean and Compile"/>
+    
+    <target name="doc" depends="init" description="Generate documentation JavaDoc">
+        <javadoc sourcepath="${src.dir}" destdir="${doc.dir}">
+			<bottom><![CDATA[<i>Copyright &#169; 2016 Dummy Corp. All Rights Reserved.</i>]]></bottom>
+			<!-- Custom tags -->
+			<tag name="todo." scope="all" description="To do:"/>
+	    </javadoc>
+    </target>    
+   
 
 </project>

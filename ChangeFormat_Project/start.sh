@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-	MAIN_CLASS_FILE="it.csttech.placeholderpackage.PlaceHolderClass"
+	MAIN_CLASS_FILE="it.csttech.UseChangeFormat"
 	CLASS_PATH=".;lib/*;bin/classes"
 
 

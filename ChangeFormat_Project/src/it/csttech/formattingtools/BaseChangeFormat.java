@@ -1,4 +1,4 @@
-package it.csttech;
+package it.csttech.formattingtools;
 
 public abstract class BaseChangeFormat {
 
