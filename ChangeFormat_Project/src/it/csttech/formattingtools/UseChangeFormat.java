@@ -1,8 +1,9 @@
 package it.csttech.formattingtools;
 
 import org.apache.commons.cli.CommandLine;
+import org.apache.log4j.Logger;
 
-public class UseChangeFormat { //TODO far funzionare anche ant con la libreria
+public class UseChangeFormat {
 
   public static final String CSV_FORMAT = "CSV";
   public static final String FW_FORMAT = "FW";
@@ -13,6 +14,8 @@ public class UseChangeFormat { //TODO far funzionare anche ant con la libreria
   public static final String HELP_OPT = "h";
   public static final String DEFAULT_IN_FILE = "data.csv";
   public static final String DEFAULT_OUT_FILE = "output.dat";
+
+  static final Logger log = Logger.getRootLogger();
 
   public static void main(String[] args) {
 
@@ -30,7 +33,8 @@ public class UseChangeFormat { //TODO far funzionare anche ant con la libreria
 	}else if(cmdLine.getOptionValue(IN_FORMAT_OPT, CSV_FORMAT).equals(FW_FORMAT) && cmdLine.getOptionValue(OUT_FORMAT_OPT, FW_FORMAT).equals(CSV_FORMAT)) {
 		changeFormat = new ChangeFormatFWtoCSV();
 	}else{
-		System.err.println("Error! Invalid format(s).");
+		//System.err.println("Error! Invalid format(s).");
+		log.error("Invalid format(s).");
 		return;
 	}
 

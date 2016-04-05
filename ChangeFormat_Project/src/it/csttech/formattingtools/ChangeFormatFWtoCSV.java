@@ -1,6 +1,10 @@
 package it.csttech.formattingtools;
 
+import org.apache.log4j.Logger;
+
 public class ChangeFormatFWtoCSV extends BaseChangeFormat implements ChangeFormat {
+
+	static final Logger log = Logger.getRootLogger();
 
 	//Non presuppone la conoscenza di FIXED_WIDTH ma può generare un problema se fra un campo e un altro rimane un singolo spazio
 	/*@Override 
@@ -28,7 +32,7 @@ public class ChangeFormatFWtoCSV extends BaseChangeFormat implements ChangeForma
 			builder.deleteCharAt(builder.length() - 1);
 
 		}else{
-			System.err.println("Error!");
+			log.warn("Line bad format. Skipped and continue!");
 		}
 		
 		return builder.toString();
