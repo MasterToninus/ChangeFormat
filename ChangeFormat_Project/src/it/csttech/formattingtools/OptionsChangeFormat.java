@@ -71,7 +71,6 @@ public class OptionsChangeFormat extends BaseMyOptions implements MyOptions {
      			if (cmdLine.hasOption("help")) {
      			    	HelpFormatter formatter = new HelpFormatter();
      			    	formatter.printHelp("Change Format", options);
-				return cmdLine;
      			}else{
 				check = true;	
 			}
