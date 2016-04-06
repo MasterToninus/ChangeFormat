@@ -13,10 +13,8 @@
     <property name="jar.dir"     value="${build.dir}/publish"/>
     <!--<property name="cfg.dir"	 value="config"/>-->
 	<property name="ivy.dep.file" value="${basedir}/dependencies.xml" />
-	<property name="ivy.install.dir" value="C:\Users\antonio.miti\Documents\GitHub\Tools_NOGIT\apache-ivy-2.4.0
-" />
 
-	<!-- Bypass a waring -->
+	<!-- Bypass a warning -->
 	<presetdef name="javac">
 		<javac includeantruntime="false" />
 	</presetdef>

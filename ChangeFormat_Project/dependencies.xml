@@ -6,7 +6,7 @@
         
         <!-- Logging -->
         <dependency org="org.apache.logging.log4j" name="log4j-api" rev="2.5" transitive="false"/>
-
+	<dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.5" transitive="false"/>
      
         
     </dependencies>
