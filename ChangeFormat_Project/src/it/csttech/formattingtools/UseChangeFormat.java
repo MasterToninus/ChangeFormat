@@ -1,7 +1,8 @@
 package it.csttech.formattingtools;
 
 import org.apache.commons.cli.CommandLine;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class UseChangeFormat {
 
@@ -15,7 +16,8 @@ public class UseChangeFormat {
   public static final String DEFAULT_IN_FILE = "data.csv";
   public static final String DEFAULT_OUT_FILE = "output.dat";
 
-  static final Logger log = Logger.getRootLogger();
+  private static final Logger log = LogManager.getLogger();
+
 
   public static void main(String[] args) {
 
