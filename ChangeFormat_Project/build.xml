@@ -11,9 +11,9 @@
     <property name="lib.dir"     value="${basedir}/lib"/>
     <property name="classes.dir" value="${build.dir}"/>
     <property name="jar.dir"     value="${build.dir}/publish"/>
-    <!--<property name="cfg.dir"	 value="config"/>-->
-	<property name="ivy.dep.file" value="${basedir}/dependencies.xml" />
-
+    <property name="cfg.dir"	 value="${basedir}/config"/>
+    <property name="ivy.dep.file" value="${basedir}/dependencies.xml" />
+	
 	<!-- Bypass a warning -->
 	<presetdef name="javac">
 		<javac includeantruntime="false" />
@@ -32,10 +32,8 @@
     </path>
 
 
-
 	<target name="clean" description="Tidy up the workspace">
 		<delete failonerror="false" dir="${build.dir}" />
-		<delete failonerror="false" dir="${lib.dir}" />
 		<delete failonerror="false" dir="ivy-report" />
 		<delete failonerror="false" dir="${doc.dir}"/>
 		<delete>
@@ -85,7 +83,7 @@
 	<target name="ivy-report">
 		<ivy:configure override="true" file="${ivy.install.dir}/ivy-settings.xml" />
 		<mkdir dir="ivy-report" />
-		<ivy:resolve file="dependencies.xml" haltonfailure="false" />
+		<ivy:resolve file="${ivy.dep.file}" haltonfailure="false" />
 		<ivy:report todir="ivy-report" />
 	</target>
 
