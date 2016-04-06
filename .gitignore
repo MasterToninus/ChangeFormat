@@ -15,7 +15,7 @@ hs_err_pid*
 **/docs/
 
 # Ignore Log
-**/log
+**/*.log
 =======
 # Ignore dat file
 **/*.dat

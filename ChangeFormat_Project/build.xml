@@ -76,7 +76,12 @@
 			<bottom><![CDATA[<i>Copyright &#169; 2016 Dummy Corp. All Rights Reserved.</i>]]></bottom>
 			<!-- Custom tags -->
 			<tag name="todo." scope="all" description="To do:"/>
-	    </javadoc>
+			<classpath>
+				<fileset dir="${lib.dir}">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+	    </javadoc>  
     </target>    
     
 	<!-- IVY TARGETS -->

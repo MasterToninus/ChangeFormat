@@ -3,23 +3,23 @@ package it.csttech.formattingtools;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * This class contains the definition of the string format conversion from  a FW to CSV
+ *
+*/
 public class ChangeFormatFWtoCSV extends BaseChangeFormat implements ChangeFormat {
 
 	private static final Logger log = LogManager.getLogger();
 
-	//Non presuppone la conoscenza di FIXED_WIDTH ma può generare un problema se fra un campo e un altro rimane un singolo spazio
-	/*@Override 
-	public String transformString(String inputString) {
-		StringBuilder builder = new StringBuilder(); //close? garbage?
-		String[] splitted = inputString.split("\\s{2,}|\\" + END_CHAR);
-		for (int i = 0; i < splitted.length; i++)  //TODO change for(String line : splitted)
-			builder.append(splitted[i] + SEPARATOR);
-
-		builder.deleteCharAt(builder.length() - 1);
-		return builder.toString();
-	}*/
-
-	@Override //Più sicuro a patto di conoscere FIXED_WIDTH
+/**
+ * 	String transformation method.
+ *	<p>
+ * 		It requires that the input string is correctly formatted.
+ *  </p>
+ * 	@param inputString string to be performed
+ * 	@return trasformed string or a void string in case the input is not a FW string
+*/
+	@Override 
 	public String transformString(String inputString) {
 		StringBuilder builder = new StringBuilder(); //close? garbage?
 		int fieldsNumber;
