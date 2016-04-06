@@ -1,11 +1,12 @@
 package it.csttech.formattingtools;
 
 import java.io.*;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ReadWrite {
 
-  static final Logger log = Logger.getRootLogger();
+  private static final Logger log = LogManager.getLogger();
 
   private void transform(ChangeFormat changeFormat, BufferedReader br, PrintWriter printWriter, String inputFile) { 
 		

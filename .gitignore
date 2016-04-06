@@ -16,3 +16,7 @@ hs_err_pid*
 
 # Ignore Log
 **/log
+=======
+# Ignore dat file
+**/*.dat
+
