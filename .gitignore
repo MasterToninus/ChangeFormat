@@ -14,8 +14,9 @@ hs_err_pid*
 # Ignore Doc
 **/docs/
 
+# Ignore Log
+**/*.log
+=======
 # Ignore dat file
 **/*.dat
 
-# Loggin
-*.log
