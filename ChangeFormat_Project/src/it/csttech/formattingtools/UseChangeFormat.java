@@ -27,6 +27,12 @@ public class UseChangeFormat {
 		return;
 	}
 
+	UseChangeFormat useChangeFormat = new UseChangeFormat(cmdLine);
+
+  }
+
+  public UseChangeFormat(CommandLine cmdLine){
+
 	ReadWrite readWrite = new ReadWrite();
 	ChangeFormat changeFormat = null;
 
@@ -43,7 +49,6 @@ public class UseChangeFormat {
 	if(changeFormat != null) {
 		readWrite.execute(cmdLine.getOptionValue(IN_FILE_OPT, DEFAULT_IN_FILE), cmdLine.getOptionValue(OUT_FILE_OPT, DEFAULT_OUT_FILE), changeFormat);
 	}
-
   }
 
 }
